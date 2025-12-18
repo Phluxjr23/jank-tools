@@ -2,8 +2,6 @@
 
 a collection of utterly useless but highly entertaining linux cli tools.
 
-for linuxjam 2025: resonance cascade (but mostly just shitposts)
-
 ## tools
 
 ### gman (c)
