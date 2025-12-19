@@ -2,8 +2,11 @@ CC = gcc
 CXX = g++
 RUSTC = rustc
 GOC = go build
+NASM = nasm
+LD = ld
 CFLAGS = -Wall -O2
 CXXFLAGS = -Wall -O2 -std=c++17
+NASMFLAGS = -f elf64
 INSTALL_DIR = /usr/local/bin
 
 # c sources
@@ -22,7 +25,11 @@ RUST_TARGETS = $(patsubst scripts/%.rs,compiled/%,$(RUST_SOURCES))
 GO_SOURCES = $(wildcard scripts/*.go)
 GO_TARGETS = $(patsubst scripts/%.go,compiled/%,$(GO_SOURCES))
 
-ALL_TARGETS = $(C_TARGETS) $(CPP_TARGETS) $(RUST_TARGETS) $(GO_TARGETS)
+# asm sources
+ASM_SOURCES = $(wildcard scripts/*.asm)
+ASM_TARGETS = $(patsubst scripts/%.asm,compiled/%,$(ASM_SOURCES))
+
+ALL_TARGETS = $(C_TARGETS) $(CPP_TARGETS) $(RUST_TARGETS) $(GO_TARGETS) $(ASM_TARGETS)
 
 all: $(ALL_TARGETS)
 
@@ -50,6 +57,14 @@ compiled/%: scripts/%.go
 	cd scripts && $(GOC) -o ../compiled/$(notdir $@) $(notdir $<)
 	@echo "compiled $@"
 
+# compile asm files
+compiled/%: scripts/%.asm
+	@mkdir -p compiled
+	$(NASM) $(NASMFLAGS) scripts/$*.asm -o scripts/$*.o
+	$(LD) scripts/$*.o -o $@
+	@rm -f scripts/$*.o
+	@echo "compiled $@"
+
 install: all
 	@echo "installing to $(INSTALL_DIR)..."
 	@for bin in $(ALL_TARGETS); do \
@@ -66,6 +81,7 @@ uninstall:
 
 clean:
 	@rm -rf compiled
+	@rm -f scripts/*.o
 	@echo "cleaned compiled binaries"
 
 .PHONY: all install uninstall clean

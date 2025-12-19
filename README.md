@@ -93,8 +93,11 @@ sleepy sounds. either "honk shoo" or "snore mimimimimimi".
 bedtime
 ```
 
----
-
+### todo (assembly)
+used `maybe` to decide if i should add this.
+```bash
+todo
+```
 ## building
 
 ### requirements
@@ -102,6 +105,7 @@ bedtime
 - g++ (for c++)
 - rustc (for rust)
 - go (for go)
+- nasm (for assembly)
 - make
 
 ### compile
