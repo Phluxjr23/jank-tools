@@ -122,10 +122,4 @@ got a stupid idea for a jank tool? open a pr. the more useless, the better.
 
 ## license
 
-do whatever you want idk lmao
-
-## credits
-
-made by someone who probably should've been doing something productive instead
-
-powered by: coffee, adhd, and the resonance cascade
+do whatever you want idk lol
