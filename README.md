@@ -98,6 +98,12 @@ used `maybe` to decide if i should add this.
 ```bash
 todo
 ```
+
+### paradox (valac)
+answers the important questions in life. like what happens if pinocchio says "my nose will grow"?
+```bash
+paradox
+```
 ## building
 
 ### requirements
